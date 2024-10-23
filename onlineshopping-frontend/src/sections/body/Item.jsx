@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import placeholderimage from "../../data/placeholderimage.jpg";
 
 const PEXELS_API_KEY =
   "tB436MubeHjFQ0CypZT6WLuTZSzABPvXmU1RfeOxoESLKIe5pXi0tB8i";
@@ -30,11 +31,11 @@ const Item = ({ id, name, price, quantity, addToCart, customImage }) => {
       if (data.photos.length > 0) {
         setImage(data.photos[0].src.medium);
       } else {
-        setImage("default-image-url.jpg");
+        setImage(placeholderimage);
       }
     } catch (error) {
       console.error(error);
-      setImage("default-image-url.jpg");
+      setImage(placeholderimage);
     } finally {
       setLoading(false);
     }
