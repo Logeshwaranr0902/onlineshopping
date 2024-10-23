@@ -42,6 +42,9 @@ const Item = ({ id, name, price, quantity, addToCart, customImage }) => {
   };
 
   useEffect(() => {
+    alert(
+      "Sorry, only 200 API requests at a time so all the images won't load"
+    );
     if (customImage) {
       setImage(customImage);
       setLoading(false);
