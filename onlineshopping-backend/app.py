@@ -6,10 +6,10 @@ app = Flask(__name__)
 CORS(app)  # Allow CORS
 
 # MySQL Configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'  # Change this if your username is different
-app.config['MYSQL_PASSWORD'] = '090203'  # Set your MySQL password here
-app.config['MYSQL_DB'] = 'ecommerce'  # Name of your database
+app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_USER'] = ''  # Change this if your username is different
+app.config['MYSQL_PASSWORD'] = ''  # Set your MySQL password here
+app.config['MYSQL_DB'] = ''  # Name of your database
 
 mysql = MySQL(app)
 
