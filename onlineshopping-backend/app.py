@@ -1,16 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
-from flask_cors import CORS  # To allow CORS for frontend communication
+from flask_cors import CORS  
 
 app = Flask(__name__)
-CORS(app)  # Allow CORS
+CORS(app)  
 
-# MySQL Configuration
+
 app.config['MYSQL_HOST'] = ''
-app.config['MYSQL_USER'] = ''  # Change this if your username is different
-app.config['MYSQL_PASSWORD'] = ''  # Set your MySQL password here
-app.config['MYSQL_DB'] = ''  # Name of your database
-
+app.config['MYSQL_USER'] = ''  
+app.config['MYSQL_PASSWORD'] = '' 
+app.config['MYSQL_DB'] = '' 
 mysql = MySQL(app)
 
 @app.route('/signup', methods=['POST'])
