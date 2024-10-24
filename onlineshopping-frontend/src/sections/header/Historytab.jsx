@@ -69,7 +69,7 @@ const Historytab = () => {
                     <div className="grid grid-cols-3 gap-1">
                       <p>Order no</p>
                       <span>:</span>
-                      <p className="-ml-28">{cart.cart_no}</p>
+                      <p className="-ml-28">{index + 1}</p>
                       <p>No of Products</p>
                       <span>:</span>
                       <p className="-ml-28">
