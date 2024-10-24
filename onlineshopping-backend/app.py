@@ -208,4 +208,5 @@ def get_cart_history(user_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use the PORT environment variable from Render
+    app.run(host='0.0.0.0', port=port)
