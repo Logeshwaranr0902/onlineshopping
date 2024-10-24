@@ -54,7 +54,7 @@ const Updateinfo = () => {
     };
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/update/${user.id}`, {
+      const response = await fetch(`https://e-commerce-website-iw68.onrender.com/update/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

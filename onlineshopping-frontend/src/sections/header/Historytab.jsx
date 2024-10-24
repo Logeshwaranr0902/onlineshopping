@@ -9,7 +9,9 @@ const Historytab = () => {
 
   useEffect(() => {
     if (openHistory) {
-      fetch(`http://127.0.0.1:5000/cart-history/${userId}`)
+      fetch(
+        `https://e-commerce-website-iw68.onrender.com/cart-history/${userId}`
+      )
         .then((response) => response.json())
         .then((data) => {
           if (!data.error) {

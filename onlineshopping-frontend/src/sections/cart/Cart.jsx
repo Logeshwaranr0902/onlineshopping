@@ -40,13 +40,16 @@ const Cart = ({ items, removeFromCart, updateQuantity, clearCart, signin }) => {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(checkoutData),
-      });
+      const response = await fetch(
+        "https://e-commerce-website-iw68.onrender.com/checkout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(checkoutData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");

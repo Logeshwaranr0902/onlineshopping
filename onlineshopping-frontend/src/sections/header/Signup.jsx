@@ -43,20 +43,23 @@ const Signup = ({ isOpen, onClose }) => {
     }
     setErrorMessage("");
 
-    const response = await fetch("http://127.0.0.1:5000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: Name,
-        email: email,
-        username: userName,
-        password: password,
-        phone_number: phoneNumber,
-        address: address,
-      }),
-    });
+    const response = await fetch(
+      "https://e-commerce-website-iw68.onrender.com/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: Name,
+          email: email,
+          username: userName,
+          password: password,
+          phone_number: phoneNumber,
+          address: address,
+        }),
+      }
+    );
 
     const data = await response.json();
     if (response.status === 409) {

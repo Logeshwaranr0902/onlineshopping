@@ -17,16 +17,19 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
     setErrorMessage("");
     setSuccessMessage(false);
 
-    const response = await fetch("http://127.0.0.1:5000/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
+    const response = await fetch(
+      "https://e-commerce-website-iw68.onrender.com/signin",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    );
 
     const data = await response.json();
 
@@ -39,7 +42,9 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
         setSuccessMessage(false);
       }, 20000);
 
-      const userResponse = await fetch(`http://127.0.0.1:5000/user/${userId}`);
+      const userResponse = await fetch(
+        `https://e-commerce-website-iw68.onrender.com/user/${userId}`
+      );
 
       if (userResponse.ok) {
         const userData = await userResponse.json();
