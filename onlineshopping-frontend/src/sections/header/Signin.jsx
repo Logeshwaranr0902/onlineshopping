@@ -4,62 +4,70 @@ import { useUser } from "../userContext";
 
 const Signin = ({ onClose, isOpen, onSignUpClick }) => {
   if (!isOpen) return null;
-  const { setUserId, setUser, user } = useUser();
+  const { setUserId, setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [transition, setTransition] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState(false);
+  const [loading, setLoading] = useState(false); // New state for loading
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage(false);
+    setLoading(true); // Start loading
 
-    const response = await fetch(
-      "https://e-commerce-website-iw68.onrender.com/signin",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      }
-    );
-
-    const data = await response.json();
-
-    if (response.ok) {
-      const userId = data.user.id;
-      setUserId(userId);
-      console.log("Sign in successful!", data);
-      setSuccessMessage(true);
-      setTimeout(() => {
-        setSuccessMessage(false);
-      }, 20000);
-
-      const userResponse = await fetch(
-        `https://e-commerce-website-iw68.onrender.com/user/${userId}`
+    try {
+      const response = await fetch(
+        "https://e-commerce-website-iw68.onrender.com/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
       );
 
-      if (userResponse.ok) {
-        const userData = await userResponse.json();
+      const data = await response.json();
 
-        setUser(userData);
-      } else {
-        console.error(
-          "Failed to fetch user data:",
-          userResponse.status,
-          userResponse.statusText
+      if (response.ok) {
+        const userId = data.user.id;
+        setUserId(userId);
+        console.log("Sign in successful!", data);
+        setSuccessMessage(true);
+        setTimeout(() => {
+          setSuccessMessage(false);
+        }, 20000);
+
+        const userResponse = await fetch(
+          `https://e-commerce-website-iw68.onrender.com/user/${userId}`
         );
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          setUser(userData);
+        } else {
+          console.error(
+            "Failed to fetch user data:",
+            userResponse.status,
+            userResponse.statusText
+          );
+        }
+      } else {
+        console.error("Sign in failed:", data.error);
+        setErrorMessage(data.error || "Sign in failed");
       }
-    } else {
-      console.error("Sign in failed:", data.error);
-      setErrorMessage(data.error || "Sign in failed");
+    } catch (error) {
+      console.error("An error occurred during sign-in:", error);
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -111,7 +119,7 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)} // Toggle show/hide password
-                className={`absolute top-5 right-3  transform -translate-y-1/2 text-blue-500 ${
+                className={`absolute top-5 right-3 transform -translate-y-1/2 text-blue-500 ${
                   showPassword ? "bg-slate-300 px-[3px] rounded-lg" : ""
                 }`}
               >
@@ -123,8 +131,9 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-all duration-300"
+            disabled={loading} // Disable button when loading
           >
-            Sign In
+            {loading ? "Loading..." : "Sign In"} {/* Show loading text */}
           </button>
         </form>
         <div className="mt-4 text-center">
