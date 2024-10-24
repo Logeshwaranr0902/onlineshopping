@@ -17,7 +17,7 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
     setErrorMessage("");
     setSuccessMessage(false);
 
-    const response = await fetch("http://localhost:5000/signin", {
+    const response = await fetch("http://127.0.0.1:5000/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
         setSuccessMessage(false);
       }, 20000);
 
-      const userResponse = await fetch(`http://localhost:5000/user/${userId}`);
+      const userResponse = await fetch(`http://127.0.0.1:5000/user/${userId}`);
 
       if (userResponse.ok) {
         const userData = await userResponse.json();
