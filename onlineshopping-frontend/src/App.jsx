@@ -11,6 +11,7 @@ import Signup from "./sections/header/Signup";
 import { UserProvider } from "./sections/userContext";
 import Updateinfo from "./sections/header/Updateinfo";
 import Historytab from "./sections/header/Historytab";
+import Notification from "./sections/body/Notification";
 
 function App() {
   const categoryRefs = useRef({});
@@ -41,6 +42,7 @@ function App() {
           contactButton={handleContactClick}
           signInButton={handleSignInClick}
         />
+        <Notification />
         <Historytab />
         <Updateinfo />
         <Popup isOpen={isPopupOpen} onClose={handleContactClick} />

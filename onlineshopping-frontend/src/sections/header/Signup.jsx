@@ -13,76 +13,90 @@ const Signup = ({ isOpen, onClose }) => {
   const [address, setAddress] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successfulMessage, setSuccessfulMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setSuccessfulMessage(false);
     if (password !== confirmPassword) {
       setErrorMessage("Passwords doesn't match");
+      setLoading(false);
       return;
     }
     setErrorMessage("");
     if (Name.length > 12) {
       setErrorMessage("Your Name should not exceed 12 characters");
+      setLoading(false);
       return;
     }
     setErrorMessage("");
-    if (phoneNumber.length < 10) {
+    if (phoneNumber.length !== 10) {
       setErrorMessage("Enter a Valid Mobile Number");
+      setLoading(false);
       return;
     }
     setErrorMessage("");
     if (password.length < 8) {
       setErrorMessage("Set password with minimum 8 Characters");
+      setLoading(false);
       return;
     }
     setErrorMessage("");
 
     if (phoneNumber === password) {
       setErrorMessage("Phone number and password cannot be the same.");
+      setLoading(false);
       return;
     }
     setErrorMessage("");
+    try {
+      const response = await fetch(
+        "https://e-commerce-website-iw68.onrender.com/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: Name,
+            email: email,
+            username: userName,
+            password: password,
+            phone_number: phoneNumber,
+            address: address,
+          }),
+        }
+      );
 
-    const response = await fetch(
-      "https://e-commerce-website-iw68.onrender.com/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: Name,
-          email: email,
-          username: userName,
-          password: password,
-          phone_number: phoneNumber,
-          address: address,
-        }),
-      }
-    );
+      const data = await response.json();
+      if (response.status === 409) {
+        setErrorMessage("Email id already exists");
+      } else if (response.ok) {
+        console.log("Signup successful!", data);
+        setSuccessfulMessage(true);
 
-    const data = await response.json();
-    if (response.status === 409) {
-      setErrorMessage("Email id already exists");
-    } else if (response.ok) {
-      console.log("Signup successful!", data);
-      setSuccessfulMessage(true);
+        setName("");
+        setEmail("");
+        setUserName("");
+        setPassword("");
+        setConfirmPassword("");
+        setPhoneNumber("");
+        setAddress("");
 
-      setName("");
-      setEmail("");
-      setUserName("");
-      setPassword("");
-      setConfirmPassword("");
-      setPhoneNumber("");
-      setAddress("");
-
-      setTimeout(() => {
+        setTimeout(() => {
+          setSuccessfulMessage(false);
+        }, 4000);
+      } else {
+        console.error("Signup failed:", data.error);
+        setErrorMessage("SignUp failed");
         setSuccessfulMessage(false);
-      }, 4000);
-    } else {
-      console.error("Signup failed:", data.error);
-      setErrorMessage("SignUp failed");
-      setSuccessfulMessage(false);
+      }
+    } catch (error) {
+      console.error("An error occurred during sign-up:", error);
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -206,7 +220,7 @@ const Signup = ({ isOpen, onClose }) => {
             type="submit"
             className="w-full bg-blue-500 text-white py-3 mt-2 rounded hover:bg-blue-600 transition-all duration-300"
           >
-            Sign Up
+            {loading ? "Loading..." : "Sign Up"}
           </button>
         </form>
         <button
