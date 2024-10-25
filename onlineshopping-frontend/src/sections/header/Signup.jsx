@@ -113,10 +113,10 @@ const Signup = ({ isOpen, onClose }) => {
           SIGN UP
         </div>
         {errorMessage && (
-          <div className="text-red-500 mb-2">{errorMessage}</div> // Display error message
+          <div className="text-red-500 mb-2">{errorMessage}</div>
         )}
         {successfulMessage && (
-          <div className="text-green-500 mb-2">SignUp Successful!!</div> // Display error message
+          <div className="text-green-500 mb-2">SignUp Successful!!</div>
         )}
         <form
           onSubmit={handleSignUp}

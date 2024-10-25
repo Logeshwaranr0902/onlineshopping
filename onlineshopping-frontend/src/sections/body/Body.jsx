@@ -5,7 +5,7 @@ import CategorySection from "./CategorySection";
 const Body = ({ addToCart, categoryRefs }) => {
   const refs = categories.reduce((acc, category) => {
     acc[category.id] = useRef(null);
-    categoryRefs.current[category.id] = acc[category.id]; // Assign to categoryRefs
+    categoryRefs.current[category.id] = acc[category.id];
     return acc;
   }, {});
 

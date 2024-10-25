@@ -32,15 +32,13 @@ export const useCart = (categoryRefs) => {
     );
   };
 
-  // Calculate the cart count dynamically based on the quantity of items
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
   const scrollToCategory = (id) => {
     if (categoryRefs.current[id]) {
       const element = categoryRefs.current[id].current;
       const { top } = element.getBoundingClientRect();
-      const scrollY = window.scrollY; // Current scroll position
-      const targetPosition = scrollY + top - 76; // Adjust for the common offset
-
+      const scrollY = window.scrollY;
+      const targetPosition = scrollY + top - 76;
       window.scrollTo({
         top: targetPosition,
         behavior: "smooth",

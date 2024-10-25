@@ -11,14 +11,12 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState(false);
-  const [loading, setLoading] = useState(false); // New state for loading
-
+  const [loading, setLoading] = useState(false);
   const handleSignIn = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage(false);
-    setLoading(true); // Start loading
-
+    setLoading(true);
     try {
       const response = await fetch(
         "https://e-commerce-website-iw68.onrender.com/signin",
@@ -67,7 +65,7 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
       console.error("An error occurred during sign-in:", error);
       setErrorMessage("An error occurred. Please try again.");
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
@@ -118,7 +116,7 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
               />
               <button
                 type="button"
-                onClick={() => setShowPassword(!showPassword)} // Toggle show/hide password
+                onClick={() => setShowPassword(!showPassword)}
                 className={`absolute top-5 right-3 transform -translate-y-1/2 text-blue-500 ${
                   showPassword ? "bg-slate-300 px-[3px] rounded-lg" : ""
                 }`}
@@ -131,7 +129,7 @@ const Signin = ({ onClose, isOpen, onSignUpClick }) => {
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-all duration-300"
-            disabled={loading} // Disable button when loading
+            disabled={loading}
           >
             {loading ? "Loading..." : "Sign In"} {/* Show loading text */}
           </button>

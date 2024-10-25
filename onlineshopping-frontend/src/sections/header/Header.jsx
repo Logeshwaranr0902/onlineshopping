@@ -5,8 +5,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useUser } from "../userContext";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import EventNoteIcon from "@mui/icons-material/EventNote";
-import MenuIcon from "@mui/icons-material/Menu"; // Import Menu icon
-
+import MenuIcon from "@mui/icons-material/Menu";
 const Header = ({
   cartCount,
   scrollToCategory,
@@ -27,7 +26,7 @@ const Header = ({
   const [query, setQuery] = useState("");
   const [showCategories, setShowCategories] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false); // State for hamburger menu
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const dropdownRef = useRef(null);
   const userMenuRef = useRef(null);
   const hammenuref = useRef(null);
@@ -43,17 +42,17 @@ const Header = ({
   };
 
   const handleCategoryClick = (id) => {
-    navigate("/"); // Navigate to the main page
+    navigate("/");
     setTimeout(() => {
-      scrollToCategory(id); // Scroll to the category after navigation
+      scrollToCategory(id);
     }, 100);
-    setShowCategories(false); // Optionally close the categories dropdown
+    setShowCategories(false);
   };
 
   const handleSignOut = () => {
-    setUser(null); // Reset the user state
+    setUser(null);
     setUserId(null);
-    navigate("/"); // Redirect to homepage
+    navigate("/");
   };
 
   const handleUpdateInfo = () => {

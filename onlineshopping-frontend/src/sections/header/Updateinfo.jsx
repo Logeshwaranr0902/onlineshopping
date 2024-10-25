@@ -15,7 +15,7 @@ const Updateinfo = () => {
   if (!updateInfo) return null;
 
   const handleUpdateInfo = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     setSuccessfulMessage(false);
     if (password !== confirmPassword) {
       setErrorMessage("Passwords doesn't match");
@@ -44,7 +44,6 @@ const Updateinfo = () => {
     }
     setErrorMessage("");
 
-    // Create an object with the updated information
     const updatedInfo = {
       name: Name,
       username: userName,
@@ -54,22 +53,24 @@ const Updateinfo = () => {
     };
 
     try {
-      const response = await fetch(`https://e-commerce-website-iw68.onrender.com/update/${user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedInfo),
-      });
+      const response = await fetch(
+        `https://e-commerce-website-iw68.onrender.com/update/${user.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedInfo),
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result.message); // Success message
-        // Reset the form and update local state if necessary
-        handleExitInfo(); // Call the existing reset logic
+        console.log(result.message);
+        handleExitInfo();
       } else {
         const error = await response.json();
-        console.error("Error:", error.message); // Handle errors
+        console.error("Error:", error.message);
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -80,7 +81,7 @@ const Updateinfo = () => {
     setIsSlidingOut(true);
     setTimeout(() => {
       setUpdateInfo(false);
-      setIsSlidingOut(false); // Now call setUpdateInfo after 300ms
+      setIsSlidingOut(false);
     }, 300);
 
     setName("");
@@ -103,10 +104,10 @@ const Updateinfo = () => {
           UPDATE INFORMATION
         </div>
         {errorMessage && (
-          <div className="text-red-500 mb-2">{errorMessage}</div> // Display error message
+          <div className="text-red-500 mb-2">{errorMessage}</div>
         )}
         {successfulMessage && (
-          <div className="text-green-500 mb-2">Updated Successful!!</div> // Display error message
+          <div className="text-green-500 mb-2">Updated Successful!!</div>
         )}
         <form
           onSubmit={handleUpdateInfo}

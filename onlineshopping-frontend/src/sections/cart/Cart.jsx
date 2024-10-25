@@ -14,7 +14,6 @@ const Cart = ({ items, removeFromCart, updateQuantity, clearCart, signin }) => {
     return total + priceNumber * item.quantity;
   }, 0);
 
-  // Calculate GST, delivery charge, and service fee only if there are items in the cart
   const gst = items.length > 0 ? totalPrice * 0.18 : 0;
   const deliveryCharge = items.length > 0 ? (totalPrice > 500 ? 0 : 50) : 0;
   const serviceFee = items.length > 0 ? 30 : 0;
@@ -36,7 +35,7 @@ const Cart = ({ items, removeFromCart, updateQuantity, clearCart, signin }) => {
     const checkoutData = {
       userId,
       items,
-      totalPrice: totalPayable, // Send the total payable amount
+      totalPrice: totalPayable,
     };
 
     try {

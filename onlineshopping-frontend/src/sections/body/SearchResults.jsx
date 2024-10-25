@@ -28,7 +28,6 @@ const SearchResults = ({ addToCart }) => {
     new URLSearchParams(location.search).get("query")?.toLowerCase() || "";
 
   useEffect(() => {
-    // Combine all products into one array
     const allProducts = [
       ...fruits,
       ...dairy,
@@ -49,17 +48,14 @@ const SearchResults = ({ addToCart }) => {
       ...homeDecor,
     ];
 
-    // Log the query to check if it's updating
     console.log("Current Query:", query);
 
-    // Filter the products based on the search query
     const filtered = allProducts.filter((product) =>
       product.name.toLowerCase().includes(query)
     );
 
     setFilteredProducts(filtered);
-  }, [query]); // Run this effect whenever the query changes
-
+  }, [query]);
   return (
     <div
       className={`flex flex-col min-h-screen text-white bg-gradient-to-br from-[#1a2244]  via-[#323875] to-[#150d35] `}

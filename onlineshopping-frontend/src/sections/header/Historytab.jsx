@@ -37,10 +37,10 @@ const Historytab = () => {
     for (const category of categories) {
       const product = category.products.find((product) => product.id === id);
       if (product) {
-        return product.name; // Return the product name if found
+        return product.name;
       }
     }
-    return null; // Return null if no product is found with the given ID
+    return null;
   };
 
   return (
