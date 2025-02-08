@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # PostgreSQL connection URI
-POSTGRES_URI = "postgresql://ecommerce_website_2hft_user:O6OaoItPUjc7akUFlguGWzgFuLucHGCo@dpg-ctrpiljtq21c739037f0-a.oregon-postgres.render.com/ecommerce_website_2hft"
+POSTGRES_URI = "postgresql://ecommerce_website_06ys_user:kUSKXllFfBcmKW8L1L1cvXHzOmzeV8kt@dpg-cujm658gph6c73bif400-a.oregon-postgres.render.com/ecommerce_website_06ys"
 
 # Function to get a database connection
 def get_db_connection():
